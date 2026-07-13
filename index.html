@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+body{
+    background:#111827;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+.card{
+    width:100%;
+    max-width:450px;
+    background:#1f2937;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+p{
+    text-align:center;
+    color:#bbb;
+    margin-bottom:20px;
+}
+textarea{
+    width:100%;
+    height:220px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:15px;
+    resize:none;
+    font-size:15px;
+    line-height:1.5;
+}
+button{
+    width:100%;
+    margin-top:12px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
+}
+button:hover{
+    transform:translateY(-2px);
+}
+#generate{
+    background:#2563eb;
+    color:white;
+}
+#review{
+    background:#22c55e;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<h2>⭐ Leave Us a Review</h2>
+
+<p>Your feedback helps us grow! ❤️</p>
+
+<textarea id="reviewText"></textarea>
+
+<button id="generate">✨ Generate Review</button>
+
+<button id="review">📋 Copy & Open Google Reviews</button>
+
+</div>
+
+<script>
+
+const reviews = [
+
+`⭐⭐⭐⭐⭐ "Best hangout spot in Rourkela!"
+Finally, a place in Rourkela that has it all! The gaming zone is well-equipped, and the private theatre is such a unique addition for weekend plans with friends. The food is served fast and tastes great. Definitely my new go-to spot.`,
+
+`⭐⭐⭐⭐⭐ "Premium vibe and amazing outdoor seating"
+The interiors here are stunning—really modern with smooth, curved designs that make the whole place feel incredibly spacious and luxurious. The new Arena Garden section is the perfect place to grab a coffee in the evening. Highly recommend checking it out.`,
+
+`⭐⭐⭐⭐⭐ "Perfect for private parties"
+Booked the private theatre for a friend's birthday and it exceeded expectations. The staff was super helpful, the menu had a lot of great options, and the whole cafe just has a really premium, welcoming energy. 10/10 experience.`,
+
+`⭐⭐⭐⭐⭐ "Great gaming, great food"
+Awesome vibe. You can easily spend hours here moving from the gaming setups to the dining area. The seating is super comfortable, and it's a great place to just chill or work for a bit. The iced coffee was fantastic!`
+
+];
+
+const textarea = document.getElementById("reviewText");
+
+document.getElementById("generate").onclick = () => {
+    textarea.value = reviews[Math.floor(Math.random()*reviews.length)];
+};
+
+document.getElementById("review").onclick = async () => {
+
+    try{
+        await navigator.clipboard.writeText(textarea.value);
+        alert("✅ Review copied!\nNow paste it into the Google review box.");
+    }catch(e){
+        alert("Copy failed. Please copy manually.");
+    }
+
+    window.open("https://maps.app.goo.gl/kFN5PUremMmQUZxh6?g_st=ac","_blank");
+
+};
+
+document.getElementById("generate").click();
+
+</script>
+
+</body>
+</html>
